@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ContactHub — a smarter, more beautiful way to organize your people.">
+  <meta name="theme-color" content="#111827">
+  <title>ContactHub — Your people, in one place</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <a class="brand" href="#" aria-label="ContactHub home"><span class="brand-icon"><i data-lucide="orbit"></i></span><span>contact<span>hub</span></span></a>
+      <div class="workspace-caption">WORKSPACE</div>
+      <nav class="side-nav" aria-label="Main navigation">
+        <button class="nav-item active" data-view="all"><i data-lucide="users"></i><span>All contacts</span><b id="sideTotal">0</b></button>
+        <button class="nav-item" data-view="favorites"><i data-lucide="star"></i><span>Favourites</span></button>
+        <button class="nav-item" data-view="recent"><i data-lucide="clock-3"></i><span>Recently added</span></button>
+      </nav>
+      <div class="workspace-caption group-caption">CATEGORIES <button id="addCategoryBtn" title="Add category"><i data-lucide="plus"></i></button></div>
+      <nav class="side-nav category-nav" id="categoryNav">
+        <button class="nav-item category-item" data-category="Work"><span class="category-dot blue"></span><span>Work</span></button>
+        <button class="nav-item category-item" data-category="Family"><span class="category-dot orange"></span><span>Family</span></button>
+        <button class="nav-item category-item" data-category="Friends"><span class="category-dot purple"></span><span>Friends</span></button>
+        <button class="nav-item category-item" data-category="Other"><span class="category-dot green"></span><span>Other</span></button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="sidebar-tip"><div class="tip-spark">✦</div><strong>Your network is<br>your superpower.</strong><p>Keep every important connection close.</p></div>
+        <button class="nav-item" id="importBtn"><i data-lucide="file-up"></i><span>Import contacts</span></button>
+        <button class="nav-item" id="settingsBtn"><i data-lucide="settings-2"></i><span>Preferences</span></button>
+        <div class="user-profile"><div class="user-avatar">CH</div><div><strong>My workspace</strong><small>Personal account</small></div><i data-lucide="more-horizontal"></i></div>
+      </div>
+    </aside>
+
+    <main class="main-area">
+      <header class="topbar">
+        <div class="crumb"><span>Workspace</span><i data-lucide="chevron-right"></i><strong id="crumbTitle">All contacts</strong></div>
+        <div class="topbar-actions">
+          <button class="shortcut-hint" id="shortcutBtn"><kbd>⌘</kbd><kbd>K</kbd><span>Quick search</span></button>
+          <button class="icon-btn" id="themeBtn" aria-label="Toggle colour theme"><i data-lucide="moon"></i></button>
+          <div class="mini-avatar">CH</div>
+        </div>
+      </header>
+
+      <div class="page">
+        <section class="welcome-row">
+          <div><div class="eyebrow"><span class="pulse"></span> YOUR PERSONAL NETWORK</div><h1 id="pageTitle">All contacts<span class="title-period">.</span></h1><p class="page-subtitle">All your important people, thoughtfully organised.</p></div>
+          <button class="primary-btn" id="addContactBtn"><i data-lucide="plus"></i> Add contact</button>
+        </section>
+
+        <section class="stats-grid" aria-label="Contact statistics">
+          <article class="stat-card stat-featured"><div class="stat-icon"><i data-lucide="contact-round"></i></div><div class="stat-label">TOTAL CONTACTS</div><div class="stat-value" id="totalCount">0</div><div class="stat-note"><span class="note-dot"></span> Your growing network</div><div class="stat-decoration">01</div></article>
+          <article class="stat-card"><div class="stat-icon violet"><i data-lucide="mail"></i></div><div class="stat-label">EMAIL ADDRESSES</div><div class="stat-value" id="emailCount">0</div><div class="stat-note">Contacts with an email</div></article>
+          <article class="stat-card"><div class="stat-icon amber"><i data-lucide="phone"></i></div><div class="stat-label">PHONE NUMBERS</div><div class="stat-value" id="phoneCount">0</div><div class="stat-note">Ready to connect</div></article>
+          <article class="stat-card"><div class="stat-icon rose"><i data-lucide="star"></i></div><div class="stat-label">FAVOURITES</div><div class="stat-value" id="favoriteCount">0</div><div class="stat-note">Your closest connections</div></article>
+        </section>
+
+        <section class="contacts-section">
+          <div class="section-heading"><div><h2>People <span class="result-pill" id="resultCount">0</span></h2><p>Find the right person, right when you need them.</p></div><div class="section-tools"><button class="soft-btn" id="exportBtn"><i data-lucide="download"></i><span>Export</span></button><button class="soft-btn" id="backupBtn"><i data-lucide="shield-check"></i><span>Backup</span></button></div></div>
+          <div class="control-bar">
+            <label class="search-field"><i data-lucide="search"></i><input id="searchInput" type="search" placeholder="Search name, email, phone..." autocomplete="off"><kbd>/</kbd></label>
+            <select id="sortSelect" aria-label="Sort contacts"><option value="name">Name A–Z</option><option value="newest">Recently added</option><option value="oldest">Oldest first</option></select>
+            <div class="view-toggle" aria-label="View mode"><button class="view-btn active" data-layout="grid" title="Grid view"><i data-lucide="layout-grid"></i></button><button class="view-btn" data-layout="list" title="List view"><i data-lucide="list"></i></button></div>
+          </div>
+          <div class="filter-strip"><span>SHOWING</span><button class="filter-chip active" data-filter="All">All</button><button class="filter-chip" data-filter="Work">Work</button><button class="filter-chip" data-filter="Family">Family</button><button class="filter-chip" data-filter="Friends">Friends</button><button class="filter-chip" data-filter="Other">Other</button></div>
+          <div id="contactGrid" class="contact-grid"></div>
+          <div id="emptyState" class="empty-state" hidden><div class="empty-art"><i data-lucide="users-round"></i><span>✦</span></div><h3>Your people will show up here</h3><p>Add a contact or try changing your search and filters.</p><button class="primary-btn" id="emptyAddBtn"><i data-lucide="plus"></i> Add your first contact</button></div>
+        </section>
+        <footer class="footer"><span>CONTACTHUB <b>•</b> MADE FOR BETTER CONNECTIONS</span><span>Your contacts stay on this device.</span></footer>
+      </div>
+    </main>
+  </div>
+
+  <dialog id="contactDialog" class="modal">
+    <form id="contactForm">
+      <div class="modal-head"><div><div class="modal-eyebrow">CONTACT DETAILS</div><h2 id="modalTitle">Add a contact</h2><p>Save the details you want to remember.</p></div><button type="button" class="close-btn" id="closeModal" aria-label="Close"><i data-lucide="x"></i></button></div>
+      <input type="hidden" id="contactId">
+      <div class="form-grid">
+        <label class="full">Full name <em>*</em><input id="name" required maxlength="60" placeholder="e.g. Rahul Sharma"></label>
+        <label>Phone number <em>*</em><input id="phone" required maxlength="25" placeholder="+91 98765 43210"></label>
+        <label>Email address<input id="email" type="email" maxlength="100" placeholder="name@example.com"></label>
+        <label>Company / Organisation<input id="company" maxlength="80" placeholder="Where they work"></label>
+        <label>Category<select id="category"><option>Work</option><option>Family</option><option>Friends</option><option>Other</option></select></label>
+        <label class="full">Address<input id="address" maxlength="140" placeholder="City, country or full address"></label>
+        <label class="full">Notes<textarea id="notes" maxlength="500" rows="3" placeholder="Interests, how you met, or anything worth remembering..."></textarea></label>
+      </div>
+      <div class="modal-foot"><span><i data-lucide="lock-keyhole"></i> Saved privately in your browser</span><div><button type="button" class="soft-btn" id="cancelBtn">Cancel</button><button type="submit" class="primary-btn"><i data-lucide="check"></i> Save contact</button></div></div>
+    </form>
+  </dialog>
+
+  <dialog id="detailDialog" class="modal detail-modal"><div id="detailContent"></div></dialog>
+  <dialog id="commandDialog" class="command-modal"><div class="command-search"><i data-lucide="search"></i><input id="commandInput" placeholder="Search your contacts..." autocomplete="off"><kbd>ESC</kbd></div><div class="command-hint">TYPE TO SEARCH YOUR CONTACTS</div><div id="commandResults"></div></dialog>
+  <input type="file" id="importFile" accept=".json,.csv,application/json,text/csv" hidden>
+  <div class="toast" id="toast"><i data-lucide="check-circle-2"></i><span id="toastText">Saved</span></div>
+  <script src="script.js"></script>
+</body>
+</html>
